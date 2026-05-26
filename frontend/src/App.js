@@ -12,7 +12,7 @@ function App() {
       const userLat = position.coords.latitude;
       const userLon = position.coords.longitude;
 
-      const response = await fetch("http://127.0.0.1:8000/search-by-pincode", {
+      const response = await fetch("https://medibee-uqg6.onrender.com/search-by-pincode", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
