@@ -1,3 +1,5 @@
+import logging
+import time
 from fastapi import FastAPI, UploadFile, File
 from pydantic import BaseModel
 import requests
@@ -11,6 +13,13 @@ from math import radians, sin, cos, sqrt, atan2
 load_dotenv()
 
 app = FastAPI()
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
+logger = logging.getLogger(__name__)
 
 app.add_middleware(
     CORSMiddleware,
@@ -58,6 +67,8 @@ def home():
 
 @app.post("/search-by-pincode")
 def search_by_pincode(data: PincodeRequest):
+    start_time = time.time()
+    logger.info(f"Received pincode search: {data.pincode}")
     pincode = data.pincode
 
     geocode_url = "https://api.geoapify.com/v1/geocode/search"
@@ -66,9 +77,10 @@ def search_by_pincode(data: PincodeRequest):
         "filter": "countrycode:in",
         "apiKey": GEOAPIFY_API_KEY,
     }
-
+    logger.info("Calling Geoapify Geocoding API...")
     geo_response = requests.get(geocode_url, params=geocode_params)
     geo_data = geo_response.json()
+    logger.info("Geocoding completed")
 
     if not geo_data.get("features"):
         return {"error": "Invalid pincode or location not found"}
@@ -85,9 +97,10 @@ def search_by_pincode(data: PincodeRequest):
         "limit": 10,
         "apiKey": GEOAPIFY_API_KEY,
     }
-
+    logger.info("Searching nearby pharmacies...")
     places_response = requests.get(places_url, params=places_params)
     places_data = places_response.json()
+    logger.info("Pharmacy search completed")
 
     stores = []
 
@@ -150,5 +163,12 @@ async def search_by_voice(audio: UploadFile = File(...)):
         return {"error": "No valid pincode detected"}
 
     pincode = match.group()
+
+    end_time = time.time()
+
+    logger.info(
+    f"Found {len(stores)} stores in "
+    f"{round(end_time - start_time, 2)} seconds"
+    )
 
     return search_by_pincode(PincodeRequest(pincode=pincode))
