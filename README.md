@@ -562,6 +562,55 @@ Production logs can be monitored directly from the Render dashboard.
 | Geoapify API | Pharmacy Search & Geocoding | Free Tier Available |
 | OpenAI Whisper API | Voice Transcription | Usage-based (~very low for demo/testing) |
 | GitHub Actions | CI/CD Pipeline | Free Tier |
+
+# 💰 OpenAI Whisper API Cost Estimation
+
+OpenAI Whisper API pricing is based on **audio duration**, not tokens.
+
+Current pricing:
+
+```text
+$0.006 per minute of audio
+```
+
+---
+
+# 📊 Estimated Monthly Cost
+
+Assuming:
+
+- average voice input = 10 seconds
+- 500 requests per month
+
+Calculation:
+
+```text
+500 × 10 seconds = 5000 seconds
+≈ 83.3 minutes
+```
+
+Estimated cost:
+
+```text
+83.3 × $0.006
+≈ $0.50/month
+```
+
+---
+
+# ✅ Approximate Usage Cost
+
+| Monthly Requests | Estimated Cost |
+|---|---|
+| 100 requests | ~$0.10 |
+| 500 requests | ~$0.50 |
+| 1000 requests | ~$1.00 |
+
+---
+
+# 📌 Note
+
+Since MediBee only processes short pincode voice inputs, Whisper API costs remain very low for demo and student-scale usage.
 ___
 # 🔮 Future Improvements
 
