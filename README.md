@@ -539,6 +539,7 @@ For detailed deployment steps, refer to:
 # 📊 Monitoring & Logs
 
 Backend logs include:
+
 - incoming requests
 - API call timings
 - pharmacy search status
@@ -547,6 +548,10 @@ Backend logs include:
 
 Production logs can be monitored directly from the Render dashboard.
 
+
+## Backend Monitoring Example
+
+![Render Logs](frontend/public/images/render-logs.png)
 ---
 # 💰 Estimated Cost
 
