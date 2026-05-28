@@ -24,8 +24,8 @@ logger = logging.getLogger(__name__)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-    "http://localhost:3000",
-    "https://medi-bee.vercel.app",
+        "http://localhost:3000",
+        "https://medi-bee.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -68,7 +68,9 @@ def home():
 @app.post("/search-by-pincode")
 def search_by_pincode(data: PincodeRequest):
     start_time = time.time()
+
     logger.info(f"Received pincode search: {data.pincode}")
+
     pincode = data.pincode
 
     geocode_url = "https://api.geoapify.com/v1/geocode/search"
@@ -77,12 +79,16 @@ def search_by_pincode(data: PincodeRequest):
         "filter": "countrycode:in",
         "apiKey": GEOAPIFY_API_KEY,
     }
+
     logger.info("Calling Geoapify Geocoding API...")
+
     geo_response = requests.get(geocode_url, params=geocode_params)
     geo_data = geo_response.json()
+
     logger.info("Geocoding completed")
 
     if not geo_data.get("features"):
+        logger.warning(f"Invalid pincode or location not found: {pincode}")
         return {"error": "Invalid pincode or location not found"}
 
     location = geo_data["features"][0]["geometry"]["coordinates"]
@@ -97,9 +103,12 @@ def search_by_pincode(data: PincodeRequest):
         "limit": 10,
         "apiKey": GEOAPIFY_API_KEY,
     }
+
     logger.info("Searching nearby pharmacies...")
+
     places_response = requests.get(places_url, params=places_params)
     places_data = places_response.json()
+
     logger.info("Pharmacy search completed")
 
     stores = []
@@ -129,6 +138,15 @@ def search_by_pincode(data: PincodeRequest):
             "distance_km": distance,
             "map_link": f"https://www.google.com/maps/search/?api=1&query={store_lat},{store_lon}",
         })
+    logger.info(f"Stores before sorting: {[store['distance_km'] for store in stores]}")
+    stores.sort(key=lambda store: float(store["distance_km"]))
+    logger.info(f"Stores after sorting: {[store['distance_km'] for store in stores]}")
+    end_time = time.time()
+
+    logger.info(
+        f"Found {len(stores)} stores in "
+        f"{round(end_time - start_time, 2)} seconds"
+    )
 
     return {
         "pincode": pincode,
@@ -155,20 +173,14 @@ async def search_by_voice(audio: UploadFile = File(...)):
 
     text = transcript.text.replace(" ", "")
 
-    print("Whisper Output:", text)
+    logger.info(f"Whisper Output: {text}")
 
     match = re.search(r"\b\d{6}\b", text)
 
     if not match:
+        logger.warning("No valid pincode detected from voice input")
         return {"error": "No valid pincode detected"}
 
     pincode = match.group()
-
-    end_time = time.time()
-
-    logger.info(
-    f"Found {len(stores)} stores in "
-    f"{round(end_time - start_time, 2)} seconds"
-    )
 
     return search_by_pincode(PincodeRequest(pincode=pincode))
