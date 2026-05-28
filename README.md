@@ -64,7 +64,7 @@ When opened, it should display:
 ---
 # 🏗️ System Architecture
 
-![MediBee Architecture](frontend/public/images/architecture.jpg)
+![MediBee Architecture](frontend/public/images/medical_store_architecture.jpg)
 ___
 # 📂 Project Structure
 
