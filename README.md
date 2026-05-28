@@ -560,10 +560,9 @@ Production logs can be monitored directly from the Render dashboard.
 | Vercel | Frontend Hosting | Free Tier |
 | Render | Backend Hosting | Free Tier |
 | Geoapify API | Pharmacy Search & Geocoding | Free Tier Available |
-| OpenAI Whisper API | Voice Transcription | Usage-based (~very low for demo/testing) |
+| OpenAI Whisper API | Voice Transcription | Usage-based (~$0.50 for 500 requests per month) |
 | GitHub Actions | CI/CD Pipeline | Free Tier |
 
-# 💰 OpenAI Whisper API Cost Estimation
 
 OpenAI Whisper API pricing is based on **audio duration**, not tokens.
 
@@ -574,8 +573,6 @@ $0.006 per minute of audio
 ```
 
 ---
-
-# 📊 Estimated Monthly Cost
 
 Assuming:
 
@@ -595,10 +592,7 @@ Estimated cost:
 83.3 × $0.006
 ≈ $0.50/month
 ```
-
----
-
-# ✅ Approximate Usage Cost
+✅ Approximate Usage Cost
 
 | Monthly Requests | Estimated Cost |
 |---|---|
