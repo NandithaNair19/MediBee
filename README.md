@@ -53,7 +53,7 @@ When opened, it should display:
 
 | Category | Technologies |
 |---|---|
-| Frontend | React.js, CSS3, Web Speech API |
+| Frontend | React.js, CSS|
 | Backend | FastAPI, Python |
 | APIs | Geoapify API, OpenAI Whisper API |
 | Deployment | Vercel, Render |
