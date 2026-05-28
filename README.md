@@ -513,17 +513,25 @@ If successful, the API returns nearby medical stores in JSON format.
 # 🚀 Deployment
 
 ## Frontend
-Deployed using **Vercel**
+
+Deployed using **[Vercel](VERCEL_DEPLOYMENT.md)**
 
 ## Backend
-Deployed using **Render**
+
+Deployed using **[Render](RENDER_DEPLOYMENT.md)**
 
 ## CI/CD
-Every push to the `main` branch automatically:
-- triggers GitHub Actions
-- builds frontend
-- redeploys latest version
 
+Every push to the `main` branch automatically:
+
+- triggers GitHub Actions
+- builds the frontend
+- redeploys the latest version
+
+For detailed deployment steps, refer to:
+
+- [Frontend Deployment Guide - Vercel](VERCEL_DEPLOYMENT.md)
+- [Backend Deployment Guide - Render](RENDER_DEPLOYMENT.md)
 ---
 
 # 📊 Monitoring & Logs
