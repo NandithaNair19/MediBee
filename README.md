@@ -65,6 +65,19 @@ When opened, it should display:
 # 🏗️ System Architecture
 
 ![MediBee Architecture](frontend/public/images/medical_store_architecture.jpg)
+
+___
+# 📌 MediBee Workflow
+
+1.User opens the app.
+2.User speaks a pincode/location.
+3.Frontend sends voice input to backend.
+4.OpenAI Whisper converts speech to text.
+5.Backend validates the pincode/location.
+6.Geoapify Geocoding API converts location to coordinates.
+7.Geoapify Places API fetches nearby medical stores.
+8.Backend formats the pharmacy list.
+9.Frontend displays nearby pharmacies to the user.
 ___
 # 📂 Project Structure
 
@@ -89,39 +102,212 @@ medical-store-app/
 ---
 
 # ⚙️ Setup Instructions
+Follow the steps below carefully to run MediBee locally on your system.
+___
 
-## 1️⃣ Clone Repository
+# 1️⃣ Clone the Repository
+
+First, open Terminal and run:
 
 ```bash
 git clone https://github.com/NandithaNair19/MediBee.git
+```
+
+This downloads the complete project to your computer.
+
+Now move into the project folder:
+
+```bash
 cd MediBee
 ```
 
 ---
 
-# 🔹 Backend Setup
+# 📂 Project Structure
 
-## Install Dependencies
+The project contains:
+
+```bash
+backend/   → FastAPI backend
+frontend/  → React frontend
+```
+
+Both frontend and backend must run separately.
+
+---
+
+# 🔹 Backend Setup (FastAPI)
+
+## Step 1 — Move into Backend Folder
 
 ```bash
 cd backend
+```
+
+---
+
+## Step 2 — Create Virtual Environment 
+
+Create a Python virtual environment:
+
+```bash
+python3 -m venv venv
+```
+
+Activate it:
+
+### macOS/Linux
+
+```bash
+source venv/bin/activate
+```
+
+After activation, your terminal should show:
+
+```bash
+(venv)
+```
+
+---
+
+## Step 3 - Install Backend Dependencies
+
+Install all required Python packages:
+
+```bash
 pip install -r requirements.txt
 ```
 
-## Create `.env`
+This installs:
+- FastAPI
+- Uvicorn
+- Requests
+- OpenAI SDK
+- dotenv
+- and other required libraries
 
-```env
-OPENAI_API_KEY=your_openai_key
-GEOAPIFY_API_KEY=your_geoapify_key
+---
+
+## Step 4 — Create `.env` File
+
+Inside the `backend` folder, create a file named:
+
+```bash
+.env
 ```
 
-## Run Backend
+Add the following:
+
+```env
+OPENAI_API_KEY=your_openai_api_key
+GEOAPIFY_API_KEY=your_geoapify_api_key
+```
+
+### Where to get the keys?
+
+# 🔑 Getting API Keys
+
+The application requires two API keys to work properly.
+
+---
+
+## 1️⃣ OpenAI API Key (For Voice Transcription)
+
+MediBee uses **OpenAI Whisper API** to convert user speech into text for voice-based pincode detection.
+
+### Steps to get the API key:
+
+1. Go to:
+
+```text
+https://platform.openai.com/signup
+```
+
+2. Create an OpenAI account or log in.
+
+3. After logging in, open:
+
+```text
+https://platform.openai.com/api-keys
+```
+
+4. Click:
+
+```text
+Create new secret key
+```
+
+5. Copy the generated API key.
+
+Example:
+
+```text
+sk-xxxxxxxxxxxxxxxx
+```
+
+6. Paste it into your `.env` file:
+
+```env
+OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxx
+```
+
+### Note
+- OpenAI usage is pay-as-you-go.
+- Whisper transcription cost is very low for demo/testing usage.
+
+---
+
+## 2️⃣ Geoapify API Key (For Pharmacy Search & Geocoding)
+
+MediBee uses **Geoapify APIs** to:
+- convert pincodes into coordinates
+- search nearby medical stores
+- calculate nearby pharmacy results
+
+### Steps to get the API key:
+
+1. Go to:
+
+```text
+https://www.geoapify.com/
+```
+
+2. Create a free account.
+
+3. After logging in, open the dashboard.
+
+4. Create a new project/app.
+
+5. Generate an API key.
+
+6. Copy the API key.
+
+7. Paste it into your `.env` file:
+
+```env
+GEOAPIFY_API_KEY=123abcxyz
+```
+
+### Note
+Geoapify provides a free tier sufficient for development and testing.
+
+---
+
+## Step 5 — Run Backend Server
+
+Start the FastAPI backend:
 
 ```bash
 python3 -m uvicorn main:app --reload
 ```
 
-Backend runs at:
+If successful, you should see:
+
+```bash
+Uvicorn running on http://127.0.0.1:8000
+```
+
+Backend now runs at:
 
 ```bash
 http://127.0.0.1:8000
@@ -129,22 +315,47 @@ http://127.0.0.1:8000
 
 ---
 
-# 🔹 Frontend Setup
+# 🔹 Frontend Setup (React)
 
-## Install Dependencies
+Open a NEW terminal window while keeping backend running.
+
+---
+
+## Step 1 — Move into Frontend Folder
+
+From project root:
 
 ```bash
 cd frontend
+```
+
+---
+
+## Step 2 — Install Frontend Dependencies
+
+Install all required npm packages:
+
+```bash
 npm install
 ```
 
-## Run Frontend
+This installs:
+- React
+- React scripts
+- required frontend libraries
+- dependencies from package.json
+
+---
+
+## Step 3 — Start React Frontend
+
+Run:
 
 ```bash
 npm start
 ```
 
-Frontend runs at:
+After a few seconds, browser automatically opens:
 
 ```bash
 http://localhost:3000
@@ -152,33 +363,107 @@ http://localhost:3000
 
 ---
 
-# 🎤 Voice Search
+# 🚀 Running the Full Application
 
-Users can click the microphone button and speak their pincode directly.
+You MUST keep BOTH running:
 
-## Example
-
-```text
-"560103"
-```
-
-The system automatically:
-- detects speech
-- extracts pincode
-- searches nearby pharmacies
-- displays nearby medical stores
+| Terminal | Purpose |
+|---|---|
+| Terminal 1 | FastAPI Backend |
+| Terminal 2 | React Frontend |
 
 ---
 
-# 🌍 API Endpoint
+# ✅ How to Use MediBee
 
-## Search Medical Stores
+1. Open the frontend in browser
+2. Click **Get Started**
+3. Choose:
+   - Type Pincode
+   - OR Speak Pincode
+4. Enter/speak valid pincode
+5. Allow location permission if prompted
+6. Nearby medical stores will appear
+7. Click **Open in Google Maps** for navigation
 
-```http
-POST /search-by-pincode
+---
+
+# 🎤 Voice Search Notes
+
+- Voice input works best on **Google Chrome**
+- Browser microphone permission must be allowed
+- Users can directly speak their pincode
+
+Example:
+
+```text
+560103
 ```
 
-## Request
+---
+
+# 🧪 Backend Testing
+
+The backend APIs can be tested using **Postman**  before running the frontend.
+
+---
+
+## 🔹 Testing with Postman
+
+### Step 1 — Open Postman
+
+Download and install Postman from:
+
+```text
+https://www.postman.com/downloads/
+```
+
+---
+
+### Step 2 — Create a New Request
+
+1. Open Postman
+2. Click **New Request**
+3. Set request type to:
+
+```text
+POST
+```
+
+4. Enter the API URL:
+
+```text
+http://127.0.0.1:8000/search-by-pincode
+```
+
+---
+
+### Step 3 — Add Headers
+
+Go to the **Headers** tab and add:
+
+| Key | Value |
+|---|---|
+| Content-Type | application/json |
+
+---
+
+### Step 4 — Add Request Body
+
+1. Open the **Body** tab
+2. Select:
+
+```text
+raw
+```
+
+3. Choose:
+
+```text
+JSON
+```
+
+4. Paste:
 
 ```json
 {
@@ -188,7 +473,21 @@ POST /search-by-pincode
 }
 ```
 
-## Response
+---
+
+### Step 5 — Send Request
+
+Click:
+
+```text
+Send
+```
+
+If successful, the API returns nearby medical stores in JSON format.
+
+---
+
+## Example Response
 
 ```json
 {
@@ -196,12 +495,20 @@ POST /search-by-pincode
     {
       "name": "Apollo Pharmacy",
       "address": "Bangalore, Karnataka",
-      "distance_km": 1.4,
-      "map_link": "https://maps.google.com/..."
+      "distance_km": 1.4
     }
   ]
 }
 ```
+## Postman Request
+
+![Postman Request](frontend/public/images/postman-request.png)
+
+---
+
+## Postman Response
+
+![Postman Response](frontend/public/images/postman-response.png)
 
 ---
 
@@ -218,16 +525,6 @@ Every push to the `main` branch automatically:
 - triggers GitHub Actions
 - builds frontend
 - redeploys latest version
-
----
-
-# 🧪 API Testing
-
-API endpoints were tested using **Postman** for:
-- pincode search
-- response validation
-- error handling
-- backend connectivity
 
 ---
 
