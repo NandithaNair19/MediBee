@@ -62,7 +62,10 @@ When opened, it should display:
 | Version Control | Git & GitHub |
 
 ---
+# 🏗️ System Architecture
 
+![MediBee Architecture](frontend/public/images/architecture.jpg)
+___
 # 📂 Project Structure
 
 ```bash
