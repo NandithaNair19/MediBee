@@ -243,7 +243,16 @@ Backend logs include:
 Production logs can be monitored directly from the Render dashboard.
 
 ---
+# 💰 Estimated Cost
 
+| Service | Purpose | Estimated Cost |
+|---|---|---|
+| Vercel | Frontend Hosting | Free Tier |
+| Render | Backend Hosting | Free Tier |
+| Geoapify API | Pharmacy Search & Geocoding | Free Tier Available |
+| OpenAI Whisper API | Voice Transcription | Usage-based (~very low for demo/testing) |
+| GitHub Actions | CI/CD Pipeline | Free Tier |
+___
 # 🔮 Future Improvements
 
 - 🌐 Multilingual voice support
