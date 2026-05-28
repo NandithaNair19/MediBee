@@ -205,8 +205,6 @@ GEOAPIFY_API_KEY=your_geoapify_api_key
 
 ### Where to get the keys?
 
-# 🔑 Getting API Keys
-
 The application requires two API keys to work properly.
 
 ---
