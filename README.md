@@ -51,15 +51,17 @@ When opened, it should display:
 
 # 🛠️ Tech Stack
 
-| Category | Technologies |
-|---|---|
-| Frontend | React.js, CSS|
-| Backend | FastAPI, Python |
-| APIs | Geoapify API, OpenAI Whisper API |
-| Deployment | Vercel, Render |
-| CI/CD | GitHub Actions |
-| Testing | Postman |
-| Version Control | Git & GitHub |
+| Category | Technologies | Version / Compatibility |
+|---|---|---|
+| Frontend | React.js, CSS3 | React 18+, Node.js 18+ |
+| Backend | FastAPI, Python | FastAPI 0.115+, Python 3.11,3.12 |
+| APIs | Geoapify API, OpenAI Whisper API | Latest Stable APIs |
+| Deployment | Vercel, Render | Cloud Hosted |
+| CI/CD | GitHub Actions | GitHub Actions v4 |
+| Testing | Postman | Postman v10+ |
+| Version Control | Git & GitHub | Git 2.30+ |
+| Speech Recognition | Web Speech API | Chrome Browsers |
+| Package Manager | npm, pip | npm 9+, pip 23+ |
 
 ---
 # 🏗️ System Architecture
