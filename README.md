@@ -601,11 +601,28 @@ Estimated cost:
 | 1000 requests | ~$1.00 |
 
 ---
+## 🚀 Run Locally (One Click)
+
+1. Download the zip from the releases page
+2. Unzip it
+3. **Mac/Linux:** Double-click `start.sh`  
+   **Windows:** Double-click `start.bat`
+4. Enter your API keys when prompted
+5. Open http://localhost:3000 in your browser
+
+### You'll need:
+- [Node.js](https://nodejs.org) installed
+- [Python 3.11+](https://python.org) installed
+- An OpenAI API key
+- A Geoapify API key
+
+---
 
 # 📌 Note
 
 Since MediBee only processes short pincode voice inputs, Whisper API costs remain very low for demo and student-scale usage.
 ___
+
 # 🔮 Future Improvements
 
 - 🌐 Multilingual voice support
