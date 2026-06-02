@@ -18,7 +18,7 @@ echo ""
 # Install backend dependencies
 echo "📦 Installing backend dependencies..."
 cd backend
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 cd ..
 
 # Install frontend dependencies
