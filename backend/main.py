@@ -33,7 +33,7 @@ app.add_middleware(
 )
 
 GEOAPIFY_API_KEY = os.getenv("GEOAPIFY_API_KEY")
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY", "dummy-key-for-ci"))
 
 
 def calculate_distance(lat1, lon1, lat2, lon2):
