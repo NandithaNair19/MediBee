@@ -27,3 +27,20 @@ jobs:
         run: |
           cd frontend
           npm run build
+    
+  smoke-test:
+    needs: build-frontend
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Vercel to deploy
+        run: sleep 30
+
+      - name: Smoke test frontend (live)
+        run: |
+          curl --fail https://medi-bee.vercel.app
+          echo "✅ Frontend is alive"
+
+      - name: Smoke test backend (live)
+        run: |
+          curl --fail https://medibee-uqg6.onrender.com
+          echo "✅ Backend is alive"

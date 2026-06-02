@@ -63,7 +63,9 @@ class PincodeRequest(BaseModel):
 @app.get("/")
 def home():
     return {"message": "Medical Store Locator API is running"}
-
+@app.get("/api/health")
+def health_check():
+    return {"status": "ok"}
 
 @app.post("/search-by-pincode")
 def search_by_pincode(data: PincodeRequest):
@@ -184,3 +186,5 @@ async def search_by_voice(audio: UploadFile = File(...)):
     pincode = match.group()
 
     return search_by_pincode(PincodeRequest(pincode=pincode))
+
+    
