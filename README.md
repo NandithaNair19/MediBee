@@ -14,6 +14,8 @@ Use the deployed MediBee application here:
 
 https://medi-bee.vercel.app
 
+Note: The deployed demo may not support voice input/output because the Azure Speech free-tier credits might have expired. The implementation and source code remain available in this repository.
+
 ---
 
 ## ⚙️ Live Backend API
